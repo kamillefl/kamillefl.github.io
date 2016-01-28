@@ -11,16 +11,21 @@
 
 <script>
 $(document).ready(function() {
+  $("#again").hide();
   $("#svar").one("change", start);
 });
 function echo(txt) {
-    var out = document.getElementById('output');
-    out.innerHTML = '<p>'+txt+'</p>';
+    $("#output").fadeOut(800, function() {
+      $(this).text(txt).fadeIn(800);
+    });
 }
 function goto(spm, fun) {
-  $("#spm").text(spm);
-  $("#svar").val("");
-  $("#svar").one("change", fun)
+  $("#ui").fadeOut(800, function() {
+    $("#spm").text(spm);
+    $("#svar").val("");
+    $("#svar").one("change", fun);
+    $(this).fadeIn(1200);
+  });
 }
 function input() {
   return $("#svar").val();
@@ -29,8 +34,9 @@ function slet_svar() {
   $("#svar").val("");
 }
 function slut() {
-  $("#svar").val("");
-  $("#spm").text("");
+  $("#svar").val("").hide();
+  $("#spm").text("").hide();
+  $("#again").fadeIn();
 }
 // Koden for spillet starter her
 function start() {
@@ -89,7 +95,10 @@ function kamilles_spm() {
 
     <div class="container">
         <div id="output"></div>
-        <label for="svar" id="spm">Hvad er dit navn:</label><input id="svar" type="text" />
+        <div id="ui">
+          <label for="svar" id="spm">Hvad er dit navn:</label><input id="svar" type="text" />
+          <a id="again" href="flygtninge.html">Spil igen?</a>
+        </div>
     </div>
 
     

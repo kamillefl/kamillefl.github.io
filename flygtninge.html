@@ -11,76 +11,119 @@
 
 <script>
 $(document).ready(function() {
-  $("#again").hide();
-  $("#svar").one("change", start);
+    $("#again").hide();
+    $("#svar").hide();
+    $("#ui").fadeOut(800, function(){$("#svar").show()});
+  start();
 });
+
 function echo(txt) {
     $("#output").fadeOut(800, function() {
-      $(this).text(txt).fadeIn(800);
+      $(this).html(txt).fadeIn(800);
     });
 }
-function goto(spm, fun) {
-  $("#ui").fadeOut(800, function() {
-    $("#spm").text(spm);
-    $("#svar").val("");
-    $("#svar").one("change", fun);
-    $(this).fadeIn(1200);
-  });
+
+function spm(txt) {
+    $("#ui").promise().done(function(){
+        $("#spm").text(txt);
+        $("#svar").val("");
+        $("#ui").fadeIn(800);
+    });
 }
-function input() {
-  return $("#svar").val();
+
+function input(fun) {
+  $("#svar").one("change", function(){
+    $("#ui").fadeOut(800);
+    fun($("#svar").val());
+  })
 }
+
+function goto(fun) {
+  fun();
+}
+
 function slet_svar() {
   $("#svar").val("");
 }
+
 function slut() {
-  $("#svar").val("").hide();
-  $("#spm").text("").hide();
-  $("#again").fadeIn();
+  $("#ui").promise().done(function(){
+      $("#svar").val("").hide();
+      $("#spm").text("").hide();
+      $("#again").show();
+      $("#ui").fadeIn();
+  });
 }
+
+
 // Koden for spillet starter her
+
 function start() {
-    var name = input();
+    echo("Spillet starter her"+
+         "<p>(Prøv at svar Ken eller Kamille)");
+    spm("Hvad er dit navn? ")
+
+    input(function( name ){
     
-    if (name == "Ken") {
-        echo("Du er sej "+name);
-        goto("Spm2", spm2)
-    } else if (name === "Kamille") {
-        echo("Du bliver sej, en gang");
-        goto("Kan du lide at bo i danmark?", kamilles_spm);
-    } else {
-        echo("Du er ikke sej "+ name);
-        slut();
-    }
+        if (name == "Ken") {
+            echo("Du er sej "+name);
+            goto(spm2)
+        } else if (name === "Kamille") {
+            goto(kamilles_spm);
+        } else {
+            echo("Du er ikke sej "+ name);
+            slut();
+        }
+    });
 }
+
 function spm2() {
-    echo("Slut");
+    
     slut();
 }
-function kamilles_spm() {
-    var dk_ok = input();
-    
-    if (dk_ok === "Ja" || dk_ok==="ja") {
-      echo("det var Godt");
-      goto("Kan du lide slik?", slik_spm);
-    } else {
-      echo("Ikke godt");
-      goto("har du en kat?", kat_spm);
-    }
-    
-   
 
+function kamilles_spm() {
+    echo("Du bliver sej, engang");
+    
+    spm("Kan du lide at bo i danmark?");
+    
+    input(function( dk_ok ){
+    
+        if (dk_ok === "Ja" || dk_ok==="ja") {
+            echo("det var Godt");
+            goto(slik_spm);
+        } else {
+            echo("Ikke godt");
+            goto(kat_spm);
+        }
+    });
 }
-  function slik_spm() {
-    var slik_spm = input();
+
+function slik_spm() {
+
+    spm("Kan du lide slik?");
+    
+    input(function ( slik_spm ) {
   
-  if (slik_spm === "Ja" || slik_spm ==="ja") {
-    echo("Fantastisk");
-  } else {
-    echo("Er du nu sikker på det?");
-  }
-  slut() 
+        if (slik_spm === "Ja" || slik_spm ==="ja") {
+            echo("Fantastisk");
+        } else {
+            echo("Er du nu sikker på det?");
+        }
+        slut();
+    });
 }
+
+function kat_spm() {
+
+    spm("har du en kat?");
+
+    input(function ( kat_ja_nej ) {  
+        echo("Godt for dig");
+        slut();
+    });
+}
+
 </script>
     <title>Spil</title>
   </head>
@@ -96,7 +139,7 @@ function kamilles_spm() {
     <div class="container">
         <div id="output"></div>
         <div id="ui">
-          <label for="svar" id="spm">Hvad er dit navn:</label><input id="svar" type="text" />
+          <label for="svar" id="spm"></label><input id="svar" type="text" />
           <a id="again" href="flygtninge.html">Spil igen?</a>
         </div>
     </div>

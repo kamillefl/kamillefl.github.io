@@ -54,13 +54,26 @@ function spm2() {
 function kamilles_spm() {
     var dk_ok = input();
     
-    if (dk_ok === "Ja") {
+    if (dk_ok === "Ja" || dk_ok==="ja") {
       echo("Godt");
+      goto("Kan du lide slik?", slik_spm);
     } else {
       echo("Ikke godt");
+      goto("har du en kat?", kat_spm);
     }
     
     slut();
+
+  
+  function slik_spm() {
+    var slik_spm = input();
+  
+  if (slik_spm === "Ja" || slik_spm ==="ja") {
+    echo("Fantastisk");
+  } else {
+    echo("Er du nu sikker på det?");
+  }
+  slut() {
 }
 </script>
     <title>Spil</title>
@@ -70,7 +83,7 @@ function kamilles_spm() {
 
     <header>
       <div class="container">
-        <h1>Et sejt spil</h1>
+        <h1>Flygtninge flugt</h1>
       </div>
     </header>
 

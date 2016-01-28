@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  $("#svar").one("change", start);
+});
+function echo(txt) {
+    var out = document.getElementById('output');
+    out.innerHTML = '<p>'+txt+'</p>';
+}
+function goto(spm, fun) {
+  $("#spm").text(spm);
+  $("#svar").val("");
+  $("#svar").one("change", fun)
+}
+function input() {
+  return $("#svar").val();
+}
+function slet_svar() {
+  $("#svar").val("");
+}
+function slut() {
+  $("#svar").val("");
+  $("#spm").text("");
+}
+// Koden for spillet starter her
+function start() {
+    var name = input();
+    
+    if (name == "Ken") {
+        echo("Du er sej "+name);
+        goto("Spm2", spm2)
+    } else if (name === "Kamille") {
+        echo("Du bliver sej, en gang");
+        goto("Kan du lide at bo i danmark?", kamilles_spm);
+    } else {
+        echo("Du er ikke sej "+ name);
+        slut();
+    }
+}
+function spm2() {
+    echo("Slut");
+    slut();
+}
+function kamilles_spm() {
+    var dk_ok = input();
+    
+    if (dk_ok === "Ja") {
+      echo("Godt");
+    } else {
+      echo("Ikke godt");
+    }
+    
+    slut();
+}
+</script>
+    <title>Spil</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Et sejt spil</h1>
+      </div>
+    </header>
+
+    <div class="container">
+        <div id="output"></div>
+        <label for="svar" id="spm">Hvad er dit navn:</label><input id="svar" type="text" />
+    </div>
+
+    
+  </body>
+</html>

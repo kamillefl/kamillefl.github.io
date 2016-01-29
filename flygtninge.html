@@ -96,10 +96,14 @@ function kat_spm() {
 
     spm("har du en kat?");
 
-    input(function ( kat_ja_nej ) {  
+    input(function ( kat_ja_nej ) { 
+      if (kat_ja_nej === "ja"){
         echo("Godt for dig");
         goto (flygtninge_spm);
-    
+      } else {
+        echo("godt for dig");
+      }
+    slut();
     });
 }
 
@@ -110,7 +114,9 @@ function flygtninge_spm() {
   "<p>(Jeg har indset at den eneste mulighed jeg har tilbage er at flygte.)"+ 
   "<p>(Jeg ved at det er nemmere at få asyl af alene, men hvad sker der hvis jeg forlader min familie?)"+ 
   "<p>(Vil det være muligt at få familiesammenførelse?)");
+  echo("hej");
   slut();
+  
 }
 
 

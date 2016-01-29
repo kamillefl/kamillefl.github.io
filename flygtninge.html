@@ -116,18 +116,19 @@ function flygtninge_spm() {
   "<p>Vil det være muligt at få familiesammenførelse?"+
   "<p>Skal jeg vælge at tage af sted?"+
   "<p>(svar enten alene eller sammen)");
+
   valg("Alene", "Sammen");
   
   input(function (flygtninge_svar) {
-    if (flygtninge_svar === "alene" || flygtninge_svar === "Alene"){
-      goto(a1_spm);
-    } else if (flygtninge_svar === "sammen" || flygtninge_svar === "Sammen") {
-      goto(s1_spm);
+    if (flygtninge_svar === "Alene"){
+        goto(a1_spm);
+    } else if (flygtninge_svar === "Sammen") {
+        goto(s1_spm);
     } else {
-      echo ("hej");
-      slut();
-      }
-    });
+        echo ("hej");
+        slut();
+    }
+  });
 }
   
 

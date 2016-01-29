@@ -121,7 +121,7 @@ function flygtninge_spm() {
   input(function (flygtninge_svar) {
     if (flygtninge_svar === "alene" || flygtninge_svar === "Alene"){
       goto(a1_spm);
-    } else {
+    } else (flygtninge_svar === "sammen" || flygtninge_svar === "Sammen)" {
       goto(s1_spm);
     }
   });
@@ -132,6 +132,7 @@ function a1_spm() {
   echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få"+ 
 "<p>familiesammenførelse");
 }
+
  
   
 

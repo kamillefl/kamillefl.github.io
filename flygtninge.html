@@ -93,11 +93,13 @@ function echo(txt) {
 }
     
 function pause(txt) {
+    var delay_time = $("#output").queue("steps").length === 0 ? 0 : 400;
+    
     $("#output").queue("steps", function( next ) {
         $("<p>").hide()
             .html(txt)
             .appendTo("#output")
-            .delay(800).fadeIn(800, next);
+            .delay(delay_time).fadeIn(800, next);
     });
 }
 

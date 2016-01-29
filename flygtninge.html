@@ -57,14 +57,15 @@ function slik_spm() {
 
     spm("Kan du lide slik?");
     
-    input(function ( slik_spm ) {
+    input(function ( slik_svar ) {
   
-        if (slik_spm === "Ja" || slik_spm ==="ja") {
+        if (slik_svar === "Ja" || slik_svar ==="ja") {
             echo("Fantastisk");
+            slut();
         } else {
             echo("Er du nu sikker på det?");
+            goto(slik_spm);
         }
-        slut();
     });
 }
 
@@ -78,7 +79,15 @@ function kat_spm() {
     });
 }
 
-// Herfra er der ikke mere interessant kode
+
+
+
+
+
+// -------  Herfra er der ikke mere interessant kode ---------------------
+// -----------------------------------------------------------------------
+
+
 $(document).ready(function() {
     $("#again").hide();
     $("#svar").hide();

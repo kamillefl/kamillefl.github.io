@@ -155,7 +155,7 @@ function valg() {
 
 function input(fun) {
     $("#ui").promise().done(function(){
-        $("#ui input").one("change", function(){
+        $("#ui input").filter(":visible").one("change", function(){
             $("#ui").fadeOut(800);
             fun($(this).val());
         });

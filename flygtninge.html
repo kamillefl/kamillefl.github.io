@@ -9,57 +9,12 @@
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    $("#again").hide();
-    $("#svar").hide();
-    $("#ui").fadeOut(800, function(){$("#svar").show()});
-  start();
-});
-
-function echo(txt) {
-    $("#output").fadeOut(800, function() {
-      $(this).html(txt).fadeIn(800);
-    });
-}
-
-function spm(txt) {
-    $("#ui").promise().done(function(){
-        $("#spm").text(txt);
-        $("#svar").val("");
-        $("#ui").fadeIn(800);
-    });
-}
-
-function input(fun) {
-  $("#svar").one("change", function(){
-    $("#ui").fadeOut(800);
-    fun($("#svar").val());
-  })
-}
-
-function goto(fun) {
-  fun();
-}
-
-function slet_svar() {
-  $("#svar").val("");
-}
-
-function slut() {
-  $("#ui").promise().done(function(){
-      $("#svar").val("").hide();
-      $("#spm").text("").hide();
-      $("#again").show();
-      $("#ui").fadeIn();
-  });
-}
-
-
 // Koden for spillet starter her
 
 function start() {
     echo("Spillet starter her"+
          "<p>(Prøv at svare Ken eller Kamille)");
+    echo("Eller Naja");
     spm("Hvad er dit navn? ")
 
     input(function( name ){
@@ -122,6 +77,57 @@ function kat_spm() {
         slut();
     });
 }
+
+// Herfra er der ikke mere interessant kode
+$(document).ready(function() {
+    $("#again").hide();
+    $("#svar").hide();
+    $("#ui").fadeOut(800, function(){$("#svar").show()});
+    start();
+});
+
+function echo(txt) {
+    $("#output").promise().done(function(){
+        $("#output").fadeOut(800, function() {
+            $(this).html(txt).fadeIn(800);
+        })});
+}
+
+function spm(txt) {
+    $("#ui").promise().done(function(){
+        $("#spm").text(txt);
+        $("#svar").val("");
+        $("#ui").fadeIn(800);
+    });
+}
+
+function input(fun) {
+  $("#svar").one("change", function(){
+    $("#ui").fadeOut(800);
+    fun($("#svar").val());
+  })
+}
+
+function goto(fun) {
+  fun();
+}
+
+function slet_svar() {
+  $("#svar").val("");
+}
+
+function slut() {
+  $("#ui").promise().done(function(){
+      $("#svar").val("").hide();
+      $("#spm").text("").hide();
+      $("#again").show();
+      $("#ui").fadeIn();
+  });
+}
+
+
+
+
 
 </script>
     <title>Spil</title>

@@ -24,6 +24,8 @@ function start() {
             goto(spm2)
         } else if (name === "Kamille") {
             goto(kamilles_spm);
+        } else if (name === "Naja") {
+            goto(najas_spm);
         } else {
             echo("Du er ikke sej "+ name);
             slut();
@@ -52,6 +54,27 @@ function kamilles_spm() {
         }
     });
 }
+
+function najas_spm() {
+    echo("Hvem er din ynglingskat?"+
+         "<p>Det er <b>vigtigt</b> at du er ærlig.");
+    valg("Jasmin", "Sitta", "Toffee", "Buller", "Jeg kan ikke lide katte");
+
+    input(function( kat ) {
+        if(kat === "Toffee") {
+            echo("Det var godt");
+            goto(slik_spm);
+        } else if (kat === "Sitta" || kat === "Jasmin") {
+            echo("Din kat elsker tallet: "+kat.length);
+            goto(slik_spm);
+        } else {
+            echo("Katte er søde");
+            slut();
+        }
+    });
+    
+}
+
 
 function slik_spm() {
 
@@ -104,17 +127,39 @@ function echo(txt) {
 
 function spm(txt) {
     $("#ui").promise().done(function(){
+        $("#valg_spm, #valg").hide();
         $("#spm").text(txt);
         $("#svar").val("");
+        $("#spm, #svar").show();
+        $("#ui").fadeIn(800);
+    });
+}
+
+function valg() {
+    var valg_div = $("#valg");
+    var args = arguments;
+
+    $("#ui").promise().done(function(){
+        valg_div.empty();
+        $("#spm, #svar").hide();
+        
+        for(var i = 0; i < args.length; i++) {
+            $('<input />', { type: 'checkbox', id: "valg_"+i, value: args[i] }).appendTo(valg_div);
+            $('<label />', { 'for': 'valg_'+i, text: args[i] }).appendTo(valg_div);
+            $('<br />').appendTo(valg_div);
+        }
+        $("#valg_spm, #valg").show();
         $("#ui").fadeIn(800);
     });
 }
 
 function input(fun) {
-  $("#svar").one("change", function(){
-    $("#ui").fadeOut(800);
-    fun($("#svar").val());
-  })
+    $("#ui").promise().done(function(){
+        $("#ui input").one("change", function(){
+            $("#ui").fadeOut(800);
+            fun($(this).val());
+        });
+    });
 }
 
 function goto(fun) {
@@ -127,8 +172,7 @@ function slet_svar() {
 
 function slut() {
   $("#ui").promise().done(function(){
-      $("#svar").val("").hide();
-      $("#spm").text("").hide();
+      $("#spm, #svar,#valg_spm, #valg").hide();
       $("#again").show();
       $("#ui").fadeIn();
   });
@@ -154,6 +198,7 @@ function slut() {
         <div id="output"></div>
         <div id="ui">
           <label for="svar" id="spm"></label><input id="svar" type="text" />
+          <label for="valg" id="valg_spm"></label><div id="valg"></div>
           <a id="again" href="flygtninge.html">Spil igen?</a>
         </div>
     </div>

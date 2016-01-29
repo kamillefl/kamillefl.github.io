@@ -12,37 +12,38 @@
 // Koden for spillet starter her
 
 function start() {
-    goto(flygtninge_spm);
+    flygtninge_spm();
 }
 
 function flygtninge_spm() {
- echo("Jeg gør mig klar til min rejse, en rejse jeg ved kan koste mig meget."+
-  "<p>Jeg har i lang tid levet med frygten for mit og min families liv."+ 
-  "<p>Jeg har indset at den eneste mulighed jeg har tilbage er at flygte."+ 
-  "<p>Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie?"+ 
-  "<p>Vil det være muligt at få familiesammenførelse?"+
-  "<p>Skal jeg vælge at tage af sted?"+
-  "<p>(svar enten alene eller sammen)");
+    echo("Jeg gør mig klar til min rejse, en rejse jeg ved kan koste mig meget. "+
+         "Jeg har i lang tid levet med frygten for mit og min families liv. "+ 
+         "Jeg har indset at den eneste mulighed jeg har tilbage er at flygte. "+ 
+         "Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie? "+ 
+         "Vil det være muligt at få familiesammenførelse?");
 
-  valg("Alene", "Sammen");
-  
-  input(function (flygtninge_svar) {
-    if (flygtninge_svar === "Alene"){
-        goto(a1_spm);
-    } else if (flygtninge_svar === "Sammen") {
-        goto(s1_spm);
-    } else {
-        echo ("hej");
-        slut();
-    }
-  });
+    pause("Skal jeg vælge at tage af sted?");
+
+    pause("Mine valg er:");
+
+    valg({
+        "Alene og tage chancen om aldrig at få dem at se igen?": a1_spm,
+        "Sammen med min familie og risikere at blive afslået?": s1_spm
+    });
 }
   
 
 function a1_spm() {
-  echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få"+ 
-       "<p>familiesammenførelse");
-    slut();
+    echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få"+ 
+         "familiesammenførelse");
+    pause("Men hvor i norden burde jeg flygte til??")
+
+    valg({
+        "Danmark": ad_spm,
+        "Sverige": as_spm,
+        "Norge"  : n_spm,
+    });
+
 }
 
 function s1_spm(){
@@ -50,104 +51,19 @@ function s1_spm(){
     slut();
 }
 
-
-
-// Gammel kode
-
-function gammel_start() {
-    echo("Spillet starter her"+
-         "<p>(Prøv at svare Ken eller Kamille)");
-    echo("Eller Naja");
-    spm("Hvad er dit navn? ")
-
-    input(function( name ){
-    
-        if (name == "Ken") {
-            echo("Du er sej "+name);
-            goto(spm2)
-        } else if (name === "Kamille") {
-            goto(kamilles_spm);
-        } else if (name === "Naja") {
-            goto(najas_spm);
-        } else {
-            echo("Du er ikke sej "+ name);
-            slut();
-        }
-    });
-}
-
-function spm2() {
-    
+function ad_spm() {
+    echo("DANMARK ER BEDST");
     slut();
 }
 
-function kamilles_spm() {
-    echo("Du bliver sej, engang");
-    
-    spm("Kan du lide at bo i danmark?");
-    
-    input(function( dk_ok ){
-    
-        if (dk_ok === "Ja" || dk_ok==="ja") {
-            echo("det var Godt");
-            goto(slik_spm);
-        } else {
-            echo("Ikke godt");
-            goto(kat_spm);
-        }
-    });
+function as_spm() {
+    echo("Sverige er nederen");
+    slut();
 }
 
-function najas_spm() {
-    echo("Hvem er din ynglingskat?"+
-         "<p>Det er <b>vigtigt</b> at du er ærlig.");
-    valg("Jasmin", "Sitta", "Toffee", "Buller", "Jeg kan ikke lide katte");
-
-    input(function( kat ) {
-        if(kat === "Toffee") {
-            echo("Det var godt");
-            goto(slik_spm);
-        } else if (kat === "Sitta" || kat === "Jasmin") {
-            echo("Din kat elsker tallet: "+kat.length);
-            goto(slik_spm);
-        } else {
-            echo("Katte er søde");
-            slut();
-        }
-    });
-    
-}
-
-
-function slik_spm() {
-
-    spm("Kan du lide slik?");
-    
-    input(function ( slik_svar ) {
-  
-        if (slik_svar === "Ja" || slik_svar ==="ja") {
-            echo("Fantastisk");
-            slut();
-        } else {
-            echo("Er du nu sikker på det?");
-            goto(slik_spm);
-        }
-    });
-}
-
-function kat_spm() {
-
-    spm("har du en kat?");
-
-    input(function ( kat_ja_nej ) { 
-      if (kat_ja_nej === "ja"){
-        echo("Godt for dig");
-        goto (flygtninge_spm);
-      } else {
-        echo("godt for dig");
-      slut();
-      }
-    });
+function n_spm() {
+    echo("I Norge er der sne");
+    slut();
 }
 
 
@@ -167,74 +83,47 @@ function kat_spm() {
 
 $(document).ready(function() {
     $("#again").hide();
-    $("#svar").hide();
-    $("#ui").fadeOut(800, function(){$("#svar").show()});
+    $("#spm, #svar,#valg_spm, #valg, #ui").hide();
     start();
 });
 
 function echo(txt) {
-    $("#output").promise().done(function(){
-        $("#output").fadeOut(800, function() {
-            $(this).html(txt).fadeIn(800);
-        })});
+    $("#output").empty().show().queue("steps", []);
+    pause(txt);
 }
-
-function spm(txt) {
-    $("#ui").promise().done(function(){
-        $("#valg_spm, #valg").hide();
-        $("#spm").text(txt);
-        $("#svar").val("");
-        $("#spm, #svar").show();
-        $("#ui").fadeIn(800);
+    
+function pause(txt) {
+    $("#output").queue("steps", function( next ) {
+        $("<p>").hide()
+            .html(txt)
+            .appendTo("#output")
+            .delay(800).fadeIn(800, next);
     });
 }
 
-function valg() {
-    var valg_div = $("#valg");
-    var args = arguments;
-
-    $("#ui").promise().done(function(){
-        valg_div.empty();
-        $("#spm, #svar").hide();
-        
-        for(var i = 0; i < args.length; i++) {
-            $('<input />', { type: 'checkbox', id: "valg_"+i, value: args[i] }).appendTo(valg_div);
-            $('<label />', { 'for': 'valg_'+i, text: args[i] }).appendTo(valg_div);
+function valg(choices) {
+    $("#output").queue("steps", function( next ) {
+        var valg_div = $("<div>").hide();
+        $.each(choices, function (choice, fun) {
+            $('<input />', { type: 'checkbox', id: "valg_"+choice, value: choice })
+                .appendTo(valg_div)
+                .one("change", function() {
+                    $("#output").fadeOut(800, fun);
+                });
+            $('<label />', { 'for': 'valg_'+choice, text: choice }).appendTo(valg_div);
             $('<br />').appendTo(valg_div);
-        }
-        $("#valg_spm, #valg").show();
-        $("#ui").fadeIn(800);
-    });
-}
-
-function input(fun) {
-    $("#ui").promise().done(function(){
-        $("#ui input").filter(":visible").one("change", function(){
-            $("#ui").fadeOut(800);
-            fun($(this).val());
         });
-    });
-}
-
-function goto(fun) {
-  fun();
-}
-
-function slet_svar() {
-  $("#svar").val("");
+        valg_div.appendTo("#output").delay(800).fadeIn(800, next);
+    }).dequeue( "steps" );
+    
 }
 
 function slut() {
-  $("#ui").promise().done(function(){
-      $("#spm, #svar,#valg_spm, #valg").hide();
-      $("#again").show();
-      $("#ui").fadeIn();
-  });
+    $("#output").queue("steps", function( next ) {
+        $("#again").show();
+        $("#ui").fadeIn(800, next);
+    }).dequeue( "steps" );
 }
-
-
-
-
 
 </script>
     <title>Spil</title>
@@ -249,12 +138,10 @@ function slut() {
     </header>
 
     <div class="container">
-        <div id="output"></div>
-        <div id="ui">
-          <label for="svar" id="spm"></label><input id="svar" type="text" />
-          <label for="valg" id="valg_spm"></label><div id="valg"></div>
-          <a id="again" href="flygtninge.html">Spil igen?</a>
-        </div>
+    <div id="output"></div>
+    <div id="ui">
+    <a id="again" href="flygtninge.html">Spil igen?</a>
+    </div>
     </div>
 
     

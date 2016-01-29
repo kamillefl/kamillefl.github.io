@@ -115,7 +115,12 @@ function flygtninge_spm() {
   "<p>Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie?"+ 
   "<p>Vil det være muligt at få familiesammenførelse?"+
   "<p> "+
-  "<p>Skal jeg vælger at tage af sted?");
+  "<p>Skal jeg vælge at tage af sted?"+
+  "<p>(svar enten alene eller sammen)");
+  
+  input(function (flygtninge_svar) {
+    if (flygtninge_svar === "alene" || flygtninge_svar === "Alene"){
+    goto(a1_spm);
 
   slut();
   

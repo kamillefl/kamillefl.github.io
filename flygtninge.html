@@ -12,6 +12,49 @@
 // Koden for spillet starter her
 
 function start() {
+    goto(flygtninge_spm);
+}
+
+function flygtninge_spm() {
+ echo("Jeg gør mig klar til min rejse, en rejse jeg ved kan koste mig meget."+
+  "<p>Jeg har i lang tid levet med frygten for mit og min families liv."+ 
+  "<p>Jeg har indset at den eneste mulighed jeg har tilbage er at flygte."+ 
+  "<p>Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie?"+ 
+  "<p>Vil det være muligt at få familiesammenførelse?"+
+  "<p>Skal jeg vælge at tage af sted?"+
+  "<p>(svar enten alene eller sammen)");
+
+  valg("Alene", "Sammen");
+  
+  input(function (flygtninge_svar) {
+    if (flygtninge_svar === "Alene"){
+        goto(a1_spm);
+    } else if (flygtninge_svar === "Sammen") {
+        goto(s1_spm);
+    } else {
+        echo ("hej");
+        slut();
+    }
+  });
+}
+  
+
+function a1_spm() {
+  echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få"+ 
+       "<p>familiesammenførelse");
+    slut();
+}
+
+function s1_spm(){
+    echo("lol");
+    slut();
+}
+
+
+
+// Gammel kode
+
+function gammel_start() {
     echo("Spillet starter her"+
          "<p>(Prøv at svare Ken eller Kamille)");
     echo("Eller Naja");
@@ -107,41 +150,6 @@ function kat_spm() {
     });
 }
 
-
-function flygtninge_spm() {
- echo("Jeg gør mig klar til min rejse, en rejse jeg ved kan koste mig meget."+
-  "<p>Jeg har i lang tid levet med frygten for mit og min families liv."+ 
-  "<p>Jeg har indset at den eneste mulighed jeg har tilbage er at flygte."+ 
-  "<p>Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie?"+ 
-  "<p>Vil det være muligt at få familiesammenførelse?"+
-  "<p>Skal jeg vælge at tage af sted?"+
-  "<p>(svar enten alene eller sammen)");
-
-  valg("Alene", "Sammen");
-  
-  input(function (flygtninge_svar) {
-    if (flygtninge_svar === "Alene"){
-        goto(a1_spm);
-    } else if (flygtninge_svar === "Sammen") {
-        goto(s1_spm);
-    } else {
-        echo ("hej");
-        slut();
-    }
-  });
-}
-  
-
-function a1_spm() {
-  echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få"+ 
-"<p>familiesammenførelse");
-slut();
-}
-
-function s1_spm(){
-  echo("lol");
-  slut();
-}
 
 
  

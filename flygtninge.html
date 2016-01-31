@@ -47,8 +47,15 @@ function a1_spm() {
 }
 
 function s1_spm(){
-    echo("lol");
-    slut();
+    echo("Jeg tør ikke tage chancen og miste min famille. Vi tager af sted sammen.");
+    pause("Men hvor i norden burde vi flygte til??")
+
+    valg({
+        "Danmark": ad_spm,
+        "Sverige": as_spm,
+        "Norge"  : n_spm,
+    });
+
 }
 
 function ad_spm() {

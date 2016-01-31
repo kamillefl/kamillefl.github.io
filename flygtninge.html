@@ -22,6 +22,8 @@ function flygtninge_spm() {
          "Jeg ved at det er nemmere at få asyl alene, men hvad sker der hvis jeg forlader min familie? "+ 
          "Vil det være muligt at få familiesammenførelse?");
 
+    show_image("flygtningelejr.jpg");
+
     pause("Skal jeg vælge at tage af sted?");
 
     pause("Mine valg er:");
@@ -34,6 +36,7 @@ function flygtninge_spm() {
   
 
 function a1_spm() {
+    show_image("blacktocat.png");
     echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få "+ 
          "familiesammenførelse");
     pause("Men hvor i norden burde jeg flygte til??")
@@ -188,14 +191,14 @@ function as2_spm() {
 
 $(document).ready(function() {
     $("#again").hide();
-    $("<img>").css({"max-width": "200px", "float" : "right", "padding-right": "50px", "id": "image" })
+    $("<img>").css({"max-width": "200px", "float" : "right", "padding-right": "50px" })
+        .attr("id", "image")
         .insertAfter("header").hide();
     $("#spm, #svar,#valg_spm, #valg, #ui").hide();
     start();
 });
 
 function echo(txt) {
-    $("#output").empty().show().queue("steps", []);
     pause(txt);
 }
     
@@ -211,15 +214,12 @@ function pause(txt) {
 }
 
 function show_image( file ){
-    $("#output").queue("steps", function( next ) {
-        if ( $("#image").is(":visible") )
-            $("#image").fadeOut(400, function(){
-                $(this).attr("src", "images/"+file).fadeIn(800);
-            });
-        else
+    if ( $("#image").is(":visible") )
+        $("#image").fadeOut(400, function(){
             $("#image").attr("src", "images/"+file).fadeIn(800);
-        next();
-    });
+        });
+    else
+        $("#image").attr("src", "images/"+file).fadeIn(800);
 }    
 
 
@@ -231,7 +231,10 @@ function valg(choices) {
             $('<input />', { type: 'checkbox', id: "valg_"+choice, value: choice })
                 .appendTo(valg_div)
                 .one("change", function() {
-                    $("#output").fadeOut(800, fun);
+                    $("#output").fadeOut(800, function () {
+                        $("#output").empty().show().queue("steps", []);
+                        fun()
+                    });
                 });
             $('<label />', { 'for': 'valg_'+choice, text: choice }).appendTo(valg_div);
             $('<br />').appendTo(valg_div);

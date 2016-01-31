@@ -73,7 +73,11 @@ function ad_spm() {
 function as_spm() {
     echo("Til Sverige jeg skal!");
     pause("Men hvordan kommer jeg ind?")
-    slut();
+    
+    valg({
+      "Jeg flygter ulovligt ind i landet.": as1_spm,
+      "Jeg tager lovligt ind i landet.": as2_spm
+    });
 }
 
 function n_spm() {
@@ -81,8 +85,8 @@ function n_spm() {
     pause("Hvilken måde skal der vælges for at komme ind i landet?")
     
     valg({
-      "Flygt ulovligt ind i landet.": n1_spm,
-      "Tag lovligt ind i landet.": n2_spm
+      "Tag lovligt ind i landet.": n1_spm,
+      "Flygt ulovligt ind i landet.": n2_spm
     });
 }
 
@@ -151,6 +155,18 @@ function n1_spm() {
 function n2_spm() {
   echo("Der er desværre ingen der kommer igennem. I bliver alle sendt tilbage.");
   pause("Du har nu gennemført spillet. Prøv igen.")
+  slut();
+}
+
+function as1_spm() {
+  echo("Du kommer igennem via en lastbil med andre flygtninge.");
+  pause("Du har nu gennemført spillet. Godt gået!")
+  slut();
+}
+
+function as2_spm() {
+  echo("Du ansøger om asyl, og kommer igennem men du kan ikke få familiesammenførelse.");
+  pause("Du har nu gennemført spillet. Men du er alene i et fremmed land.")
   slut();
 }
 

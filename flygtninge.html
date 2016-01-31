@@ -52,7 +52,7 @@ function s1_spm(){
 
     valg({
         "Danmark": sd_spm,
-        "Sverige": as_spm,
+        "Sverige": ss_spm,
         "Norge"  : n_spm,
     });
 }
@@ -79,7 +79,21 @@ function as_spm() {
 function n_spm() {
     echo("Turen går til Norge!");
     pause("Hvilken måde skal der vælges for at komme ind i landet?")
-    slut();
+    
+    valg({
+      "Flygt ulovligt ind i landet.": n1_spm,
+      "Tag lovligt ind i landet.": n2_spm
+    });
+}
+
+function ss_spm() {
+  echo("Vi skal til Sverige!");
+  pause("Men hvordan kommer vi ind i landet?")
+  
+  valg({
+    "Vi flygter ulovligt ind i landet.": ss1_spm,
+    "Vi tager lovligt ind i landet." : ss2_spm
+  });
 }
 
 function ad1_spm() {
@@ -115,6 +129,25 @@ function sd2_spm() {
   pause("Du har nu gennemført spillet. Tillykke.")
   slut();
 }
+
+function ss1_spm() {
+  echo("Din familie bliver opdaget, men du kommer igennem.");
+  pause("Du har nu gennemført spillet. Men du er alene.")
+  slut();
+}
+
+function ss2_spm() {
+  echo("I ansøger om asyl, men kommer ikke igennem.");
+  pause("Du har nu gennemført spillet. Men du er tilbage hvor du startede.")
+  slut();
+}
+
+function n1_spm() {
+  echo("Dig og din familie får opholdstilladelse i et år og så må i jo søge igen.");
+  pause("Du har nu gennemført spillet. Flot.")
+  slut();
+}
+
 
 
 

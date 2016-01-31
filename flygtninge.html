@@ -188,6 +188,8 @@ function as2_spm() {
 
 $(document).ready(function() {
     $("#again").hide();
+    $("<img>").css({"max-width": "200px", "float" : "right", "padding-right": "50px", "id": "image" })
+        .insertAfter("header").hide();
     $("#spm, #svar,#valg_spm, #valg, #ui").hide();
     start();
 });
@@ -207,6 +209,20 @@ function pause(txt) {
             .delay(delay_time).fadeIn(800, next);
     });
 }
+
+function show_image( file ){
+    $("#output").queue("steps", function( next ) {
+        if ( $("#image").is(":visible") )
+            $("#image").fadeOut(400, function(){
+                $(this).attr("src", "images/"+file).fadeIn(800);
+            });
+        else
+            $("#image").attr("src", "images/"+file).fadeIn(800);
+        next();
+    });
+}    
+
+
 
 function valg(choices) {
     $("#output").queue("steps", function( next ) {
@@ -244,7 +260,7 @@ function slut() {
       </div>
     </header>
 
-    <div class="container">
+    <div class="container" id="content">
     <div id="output"></div>
     <div id="ui">
     <a id="again" href="flygtninge.html">Spil igen?</a>

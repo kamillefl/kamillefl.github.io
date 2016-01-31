@@ -61,7 +61,12 @@ function s1_spm(){
 function ad_spm() {
     echo("Til Danmark jeg skal!");
     pause("Men hvordan kommer jeg ind i landet?")
-    slut();
+    
+    valg({
+        "Prøve at komme igennem lovligt, men større chance for at blive sendt tilbage.": ad1_spm,
+        "Prøve at komme igennem ulovligt, men med risiko for at blev opdaget og få en straf.": ad2_spm
+    });
+
 }
 
 function as_spm() {
@@ -74,6 +79,18 @@ function n_spm() {
     echo("Turen går til Norge!");
     pause("Hvilken måde skal der vælges for at komme ind i landet?")
     slut();
+}
+
+function ad1_spm() {
+  echo("Du ansøger om asyl og kommer igennem, du får familiesammenførelse tre år senere.");
+  pause("Du har nu gennemført spillet. YAY!")
+  slut();
+}
+
+function ad2_spm() {
+  echo("Du prøver at komme ind i landet ulovligt, men bliver fanget og idømt 5 års fængsel.");
+  pause("Du har nu gennemført spillet. Men du er i fængsel.")
+  slut();
 }
 
 

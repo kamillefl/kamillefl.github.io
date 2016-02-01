@@ -235,10 +235,10 @@ function pause(txt) {
 function show_image( file ){
     if ( $("#image").is(":visible") )
         $("#image").fadeOut(400, function(){
-            $("#image").attr("src", "images/"+file).fadeIn(800);
+            $("#image").attr("src", "images/"+file).load(function() { $(this).fadeIn(800) });
         });
     else
-        $("#image").attr("src", "images/"+file).fadeIn(800);
+        $("#image").attr("src", "images/"+file).load(function() { $(this).fadeIn(800) });
 }    
 
 

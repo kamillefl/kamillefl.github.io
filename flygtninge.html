@@ -24,7 +24,7 @@ function flygtninge_spm() {
 
     show_image("flygtningelejr.jpg");
 
-    pause("Skal jeg vælge at tage afsted?");
+    pause("Skal jeg vælge at tage af sted?");
 
     pause("Mine valg er:");
 
@@ -37,9 +37,9 @@ function flygtninge_spm() {
 
 function a1_spm() {
     show_image("nordiskkort.png");
-    echo("Jeg tager chancen og rejser afsted alene, i håb om at det kan lykkes mig at få "+ 
+    echo("Jeg tager chancen og rejser af sted alene, i håb om at det kan lykkes mig at få "+ 
          "familiesammenførelse");
-    pause("Men hvor i Norden burde jeg flygte til??")
+    pause("Men hvor i norden burde jeg flygte til??")
 
     valg({
         "Danmark": ad_spm,
@@ -51,8 +51,8 @@ function a1_spm() {
 
 function s1_spm(){
   show_image("nordiskkort.png");
-    echo("Jeg tør ikke tage chancen og miste min famille. Vi tager afsted sammen.");
-    pause("Men hvor i Norden burde vi flygte til??")
+    echo("Jeg tør ikke tage chancen og miste min famille. Vi tager af sted sammen.");
+    pause("Men hvor i norden burde vi flygte til??")
 
     valg({
         "Danmark": sd_spm,
@@ -69,8 +69,8 @@ function ad_spm() {
     pause("Men hvordan kommer jeg ind i landet?")
     
     valg({
-        "Prøver at komme igennem lovligt, men større chance for at blive sendt tilbage.": ad1_spm,
-        "Prøver at komme igennem ulovligt, men med risiko for at blive opdaget og få en straf.": ad2_spm
+        "Prøve at komme igennem lovligt, men større chance for at blive sendt tilbage.": ad1_spm,
+        "Prøve at komme igennem ulovligt, men med risiko for at blev opdaget og få en straf.": ad2_spm
     });
 
 }
@@ -89,7 +89,7 @@ function as_spm() {
 function n_spm() {
   show_image("norskflag.jpg");
     echo("Turen går til Norge!");
-    pause("Hvilken måde skal jeg vælge at komme ind i landet på?")
+    pause("Hvilken måde skal der vælges for at komme ind i landet?")
     
     valg({
       "Tag lovligt ind i landet.": n1_spm,
@@ -109,14 +109,16 @@ function ss_spm() {
 }
 
 function ad1_spm() {
-  echo("Du ansøger om asyl og kommer igennem, i får familiesammenførelse et år senere.");
-  pause("Du har nu gennemført spillet. Godt gået!")
+  echo("Du ansøger om asyl og kommer igennem, du får familiesammenførelse tre år senere."+
+  "Men de har ikke taget jeres kat med. Du savner stadig den kat");
+  pause("Du har nu gennemført spillet. YAY!")
   slut();
 }
 
 function ad2_spm() {
-  echo("Du prøver at komme ind i landet ulovligt, men bliver fanget og idømt 5 års fængsel.");
-  pause("Du har nu gennemført spillet. Men du er i fængsel.")
+  echo("Du prøver at komme ind i landet ulovligt, men bliver fanget og idømt 5 års fængsel."+
+  "På grund af isolation bliver du sindsyg og anbragt på en sindsygeanstalt.");
+  pause("Du har nu gennemført spillet. Men du er sindsyg.")
   slut();
 }
 
@@ -133,19 +135,22 @@ function sd_spm() {
 
 
 function sd1_spm() {
-  echo("Du kommer ind sammen med din familie, men i lever som fattige på gaden.");
-  pause("Du har nu gennemført spillet. Men i er desværre blevet fattige…")
+  echo("Du kommer ind sammen med din familie, men i lever som fattige på gaden."+
+  "I sparer sammen til en hund og begynder at tjene penge på at få den til "+
+  "at lave tricks.");
+  pause("Du har nu gennemført spillet. Men du er fattig…")
   slut();
 }
 
 function sd2_spm() {
-  echo("I kommer ikke igennem og bliver sendt tilbage.");
-  pause("Du har nu gennemført spillet.")
+  echo("I kommer ikke igennem på grund af den store mængde af flygtninge og bliver sendt tilbage.");
+  pause("Du har nu gennemført spillet. Tillykke.")
   slut();
 }
 
 function ss1_spm() {
-  echo("Din familie bliver opdaget, men du kommer igennem.");
+  echo("Din familie bliver opdaget, men du kommer igennem."+
+  "hdh");
   pause("Du har nu gennemført spillet. Men du er alene.")
   slut();
 }
@@ -157,7 +162,7 @@ function ss2_spm() {
 }
 
 function n1_spm() {
-  echo("Din familie og dig får opholdstilladelse i et år og så må i jo søge igen.");
+  echo("Dig og din familie får opholdstilladelse i et år og så må i jo søge igen.");
   pause("Du har nu gennemført spillet. Flot.")
   slut();
 }
@@ -169,7 +174,7 @@ function n2_spm() {
 }
 
 function as1_spm() {
-  echo("Du kommer igennem via en lastbil, med andre flygtninge.");
+  echo("Du kommer igennem via en lastbil med andre flygtninge.");
   pause("Du har nu gennemført spillet. Godt gået!")
   slut();
 }
